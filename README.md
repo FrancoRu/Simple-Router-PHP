@@ -64,7 +64,7 @@ If we have the following middleware that validates sessions in PHP:
 ```php
 $authMiddleware = function () {
     session_start();
-    $exist = isset($_SESSION['email']) && isset($_SESSION['username']) && isset($_SESSION['id']) && isset($_SESSION['role']) && isset($_SESSION['message']);
+    $exist = isset($_SESSION['email']) && isset($_SESSION['username']) && isset($_SESSION['id']) && isset($_SESSION['role']));
 
     if (!$exist) {
         header("Location: login");
