@@ -28,15 +28,18 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 RewriteRule ^(.*)$ index.php [QSA,L]
 ```
+5. **File preparation:**
+    - Create an index.php file.
+    - Declare the namespace App in index.php.
 
-5. **Namespaces:** Define the namespaces in router.php and in your root file. Make sure to have the namespace correctly structured to match your project's structure.
+6. **Namespaces:** Define the namespaces in router.php and in your root file. Make sure to have the namespace correctly structured to match your project's structure.
 
-6. **Add the file that processes the URLs:**
+7. **Add the file that processes the URLs to the root directory of the project:**
    ```php
    require_once 'config.php';
    ```
 
-7. **Route Creation:** In your root file, declare an instance of the router:
+8. **Route Creation:** In your root file, declare an instance of the router:
 
 ```php
 $router = new Router();
