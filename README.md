@@ -39,12 +39,12 @@ Then you can declare routes as follows:
 $router->endpoint('{Verb}', '{Path}', {...Callbacks});
 ```
 
-### Notas:
-- **Verbo**: Can take values of: 'GET', 'POST', 'PUT', or 'DELETE'.
+### Notes:
+- **Verb**: Can take values of: 'GET', 'POST', 'PUT', or 'DELETE'.
 - **Path**: Is the route after the domain, for example, '/' is the project's root.
 - **Callbacks**: Are the anonymous functions to be used when the route is matched.
 
-UOnce all your routes are defined, use `start` at the end of your file declaring the routes to start the router:
+Once all your routes are defined, use `start` at the end of your file declaring the routes to start the router:
 
 ```php
 $router->start();
