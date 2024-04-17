@@ -36,7 +36,7 @@ $router = new Router();
 Then you can declare routes as follows:
 
 ```php
-$router->endpoint('{verbo}', '{path}', {...callbacks});
+$router->endpoint('{Verb}', '{Path}', {...Callbacks});
 ```
 
 ### Notas:
