@@ -6,7 +6,7 @@ $url = substr($urlPath, strlen(($folderPath)));
 
 $urlWithoutParams = strstr($url, '?', true);
 if ($urlWithoutParams === false) {
-    // Si no se encuentra un signo de interrogación, la URL permanece igual
+    // If a question mark is not found, the URL remains unchanged
     $urlWithoutParams = $url;
 }
 
