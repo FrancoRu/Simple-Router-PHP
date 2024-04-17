@@ -80,7 +80,7 @@ class Router
      */
     private function badrequest(): void
     {
-        echo '<h1>Pagina no encontrada revisa tu url</h1>';
+        echo '<h1>Page not found, please check your URL.</h1>';
     }
 
     /*
