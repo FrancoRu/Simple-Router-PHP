@@ -31,7 +31,12 @@ RewriteRule ^(.*)$ index.php [QSA,L]
 
 5. **Namespaces:** Define the namespaces in router.php and in your root file. Make sure to have the namespace correctly structured to match your project's structure.
 
-6. **Route Creation:** In your root file, declare an instance of the router:
+6. **Add the file that processes the URLs:**
+   ```php
+   require_once 'config.php';
+   ```
+
+7. **Route Creation:** In your root file, declare an instance of the router:
 
 ```php
 $router = new Router();
