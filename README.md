@@ -15,15 +15,13 @@ This router offers a user-friendly and straightforward application, presenting i
 3. **Create a .htaccess file:** Create a .htaccess file in the root directory.
     
 4. **Add rules to .htaccess: In the .htaccess file, write the following rules:**
-   ```
+
+```
 RewriteEngine On
 
-# Si la solicitud no es un archivo real y no es un directorio real
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-
-# Redirigir la solicitud al script principal
 RewriteRule ^(.*)$ index.php [QSA,L]
 ```
 
