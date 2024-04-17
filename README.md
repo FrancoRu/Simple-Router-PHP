@@ -80,7 +80,7 @@ We can use it in the function call stacks as follows:
 
 ```php
 $router->endpoint('GET', '/home', $authMiddleware, function () {
-    echo '<h1>Tiene sesion encontrada</h1>'
+    echo '<h1>Session found</h1>'
 });
 ```
 
@@ -88,6 +88,6 @@ Note that if the session does not exist, the user is redirected to login, where 
 
 ```php
 $router->endpoint('GET', '/login', function () {
-   //Aca se declara la vista de /login
+   //Here the view of /login
 });
 ```
