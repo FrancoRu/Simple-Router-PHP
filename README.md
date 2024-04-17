@@ -31,6 +31,14 @@ RewriteRule ^(.*)$ index.php [QSA,L]
 5. **File preparation:**
     - Create an index.php file.
     - Declare the namespace App in index.php.
+    
+     ```php
+      <?php
+     //in index.php
+      namespace App;
+    ```
+
+
 
 6. **Namespaces:** Define the namespaces in router.php and in your root file. Make sure to have the namespace correctly structured to match your project's structure.
 
