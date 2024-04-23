@@ -13,3 +13,11 @@ Change log for **Simple-Router-PHP**
 ### Additional Notes
 - **Initial Implementation for Routes Without Params Only:** The nature of the router itself will lead us to use params, but for now, this functionality will be left for future testing.
 - **Testing:** Testing will be added periodically. Warning!!! Version *EXPERIMENTAL ONLY*.
+
+## [1.0.1] - 2024-04-23
+
+### Added
+* The addition of four functions for utilizing HTTP verbs was implemented.
+
+### Changed
+* The `endpoint` function was modified to make it private and use the new functions.
