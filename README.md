@@ -56,11 +56,18 @@ $router = new Router();
 Then you can declare routes as follows:
 
 ```php
-$router->endpoint('{Verb}', '{Path}', {...Callbacks});
+$router->{verb}('{Path}', {...Callbacks});
+```
+
+* example:
+```php
+$router->get('/', function(){
+    return view();
+});
 ```
 
 ### Notes:
-- **Verb**: Can take values of: 'GET', 'POST', 'PUT', or 'DELETE'.
+- **Verb**: Can take values of: 'get', 'post', 'put', or 'delete'. Now as functions, to simplify implementation.
 - **Path**: Is the route after the domain, for example, '/' is the project's root.
 - **Callbacks**: Are the anonymous functions to be used when the route is matched.
 
