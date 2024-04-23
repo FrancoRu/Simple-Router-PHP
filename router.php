@@ -41,7 +41,7 @@ class Router
      * @param callable $callback The callback function to execute when the route is matched.
      * @return void Always, but when no errors are found, if an error is encountered, print a message via console.log.
      */
-    public function endpoint(string $method, string $path, callable ...$callback): void
+    private function endpoint(string $method, string $path, callable ...$callback): void
     {
         if (!in_array($method, $this->methods, true)) $this->methodNotFound();
 
@@ -49,6 +49,54 @@ class Router
             'path' => $path,
             'callback' => $callback
         ];
+    }
+
+    /**
+     * Define a route for GET requests.
+     *
+     * @param string $path The URL path for the GET route.
+     * @param callable ...$callback One or more callback functions to execute when the GET route is matched.
+     * @return void
+     */
+    public function get(string $path, callable ...$callback): void
+    {
+        $this->endpoint('GET', $path, $callback);
+    }
+
+    /**
+     * Define a route for POST requests.
+     *
+     * @param string $path The URL path for the POST route.
+     * @param callable ...$callback One or more callback functions to execute when the POST route is matched.
+     * @return void
+     */
+    public function post(string $path, callable ...$callback): void
+    {
+        $this->endpoint('POST', $path, $callback);
+    }
+
+    /**
+     * Define a route for PUT requests.
+     *
+     * @param string $path The URL path for the PUT route.
+     * @param callable ...$callback One or more callback functions to execute when the PUT route is matched.
+     * @return void
+     */
+    public function put(string $path, callable ...$callback): void
+    {
+        $this->endpoint('PUT', $path, $callback);
+    }
+
+    /**
+     * Define a route for DELETE requests.
+     *
+     * @param string $path The URL path for the DELETE route.
+     * @param callable ...$callback One or more callback functions to execute when the DELETE route is matched.
+     * @return void
+     */
+    public function delete(string $path, callable ...$callback): void
+    {
+        $this->endpoint('DELETE', $path, $callback);
     }
 
     /**
@@ -80,7 +128,7 @@ class Router
      */
     private function badrequest(): void
     {
-        echo '<h1>Page not found, please check your URL.</h1>';
+        echo '<h1Page not found</h1>';
     }
 
     /*
