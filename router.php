@@ -60,7 +60,7 @@ class Router
      */
     public function get(string $path, callable ...$callback): void
     {
-        $this->endpoint('GET', $path, $callback);
+        $this->endpoint('GET', $path, ...$callback);
     }
 
     /**
@@ -72,7 +72,7 @@ class Router
      */
     public function post(string $path, callable ...$callback): void
     {
-        $this->endpoint('POST', $path, $callback);
+        $this->endpoint('POST', $path, ...$callback);
     }
 
     /**
@@ -84,7 +84,7 @@ class Router
      */
     public function put(string $path, callable ...$callback): void
     {
-        $this->endpoint('PUT', $path, $callback);
+        $this->endpoint('PUT', $path, ...$callback);
     }
 
     /**
@@ -96,7 +96,7 @@ class Router
      */
     public function delete(string $path, callable ...$callback): void
     {
-        $this->endpoint('DELETE', $path, $callback);
+        $this->endpoint('DELETE', $path, ...$callback);
     }
 
     /**
@@ -114,7 +114,9 @@ class Router
         foreach ($this->mapper[$method] as $element) {
             if (strcmp($element['path'], $path) === 0) {
                 foreach ($element['callback'] as $call) {
-                    $call();
+                    if (is_callable($call)) {
+                        call_user_func($call);
+                    }
                 }
                 exit;
             }
@@ -128,7 +130,7 @@ class Router
      */
     private function badrequest(): void
     {
-        echo '<h1Page not found</h1>';
+        echo '<h1>Pagina no encontrada revisa tu url</h1>';
     }
 
     /*
