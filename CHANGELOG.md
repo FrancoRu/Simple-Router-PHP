@@ -21,3 +21,8 @@ Change log for **Simple-Router-PHP**
 
 ### Changed
 * The `endpoint` function was modified to make it private and use the new functions.
+
+## [1.0.2] - 2024-04-26
+
+### Added
+* Added support for grouping routes with common prefix path or middleware using the `group` method.
