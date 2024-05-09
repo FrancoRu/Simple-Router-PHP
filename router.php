@@ -27,11 +27,11 @@ class Router
     private bool $isGrouping;
 
     /**
-     * @var mixed $options An array of options for the group, including:
+     * @var array $options An array of options for the group, including:
      *   - "path": The common prefix path for all routes within this group. Defaults to an empty string.
      *   - "middleware": An array of middleware functions to be applied to all routes within this group. Defaults to an empty array.
      */
-    private mixed $options;
+    private array $options;
 
     /**
      * Constructor initializes the Router class.
@@ -53,7 +53,7 @@ class Router
      * @param callable $callback The callback function to execute when the route is matched.
      * @return void Always, but when no errors are found, if an error is encountered, print a message via console.log.
      */
-    public function endpoint(string $method, string $path, callable ...$callback): void
+    private function endpoint(string $method, string $path, callable ...$callback): void
     {
         if (!in_array($method, $this->methods, true))
             $this->methodNotFound();
@@ -94,13 +94,13 @@ class Router
     /**
      * Defines a group of routes with common prefix path or middlewares.
      *
-     * @param mixed $options An array of options for the group, including:
+     * @param array $options An array of options for the group, including:
      *   - "path": The common prefix path for all routes within this group. Defaults to an empty string.
      *   - "middleware": An array of middleware functions to be applied to all routes within this group. Defaults to an empty array.
      * @param callable $callback A callback function where routes specific to this group are defined.
      * @return void
      */
-    public function group(mixed $options, callable $callback): void
+    public function group(array $options, callable $callback): void
     {
         if (!isset($options["path"]))
             $options["path"] = "";
