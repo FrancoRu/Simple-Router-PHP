@@ -9,15 +9,12 @@ This router offers a user-friendly and straightforward application, presenting i
 ## Usage
 
 1. **Installation**: Clone the repository:
-    
    ```bash
    git clone https://github.com/FrancoRu/Simple-Router-PHP.git .
-   ``` 
-   
+   ```
 2. **Ensure that files:** Ensure that config.php and router.php are in the root of your project.
- 
+
 3. **Create a .htaccess file:** Create a .htaccess file in the root directory.
-    
 4. **Add rules to .htaccess: In the .htaccess file, write the following rules:**
 
 ```
@@ -28,21 +25,22 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 RewriteRule ^(.*)$ index.php [QSA,L]
 ```
+
 5. **File preparation:**
-    - Create an index.php file.
-    - Declare the namespace App in index.php.
-    
-     ```php
-      <?php
-     //in index.php
-      namespace App;
-    ```
 
+   - Create an index.php file.
+   - Declare the namespace App in index.php.
 
+   ```php
+    <?php
+   //in index.php
+    namespace App;
+   ```
 
 6. **Namespaces:** Define the namespaces in router.php and in your root file. Make sure to have the namespace correctly structured to match your project's structure.
 
 7. **Add the file that processes the URLs to the root directory of the project:**
+
    ```php
    require_once 'config.php';
    ```
@@ -59,7 +57,8 @@ Then you can declare routes as follows:
 $router->{verb}('{Path}', {...Callbacks});
 ```
 
-* example:
+- example:
+
 ```php
 $router->get('/', function(){
     return view();
@@ -67,6 +66,7 @@ $router->get('/', function(){
 ```
 
 ### Notes:
+
 - **Verb**: Can take values of: 'get', 'post', 'put', or 'delete'. Now as functions, to simplify implementation.
 - **Path**: Is the route after the domain, for example, '/' is the project's root.
 - **Callbacks**: Are the anonymous functions to be used when the route is matched.
@@ -116,5 +116,22 @@ Note that if the session does not exist, the user is redirected to login, where 
 ```php
 $router->get( '/login', function () {
    //Here the view of /login
+});
+```
+
+**Group Method:**
+
+The `group` method is used to define a group of routes with common prefix path or middleware.
+
+To apply middleware to a group of routes, you can pass the middleware as part of the options array in the `group` method. Here's how to do it:
+
+```php
+$router->group(["path" => "/api", "middleware" => [$authMiddleware]], function($router) {
+    $router->get('/', function(){
+        //Here the code
+    });
+    $router->get('/users', $loggerMiddleware ,function(){
+        //Here the code
+    });
 });
 ```

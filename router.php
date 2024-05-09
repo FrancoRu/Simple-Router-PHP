@@ -22,6 +22,18 @@ class Router
     private array $mapper;
 
     /**
+     * @var bool $isGrouping Defines when routes should be grouped.
+     */
+    private bool $isGrouping;
+
+    /**
+     * @var array $options An array of options for the group, including:
+     *   - "path": The common prefix path for all routes within this group. Defaults to an empty string.
+     *   - "middleware": An array of middleware functions to be applied to all routes within this group. Defaults to an empty array.
+     */
+    private array $options;
+
+    /**
      * Constructor initializes the Router class.
      */
     public function __construct()
@@ -43,12 +55,64 @@ class Router
      */
     private function endpoint(string $method, string $path, callable ...$callback): void
     {
-        if (!in_array($method, $this->methods, true)) $this->methodNotFound();
+        if (!in_array($method, $this->methods, true))
+            $this->methodNotFound();
+
+        if ($this->isGrouping) {
+            $callback = array_merge($this->options["middleware"], $callback);
+            $path = $this->concatenatePaths($this->options["middleware"], $path);
+        }
 
         $this->mapper[$method][] = [
             'path' => $path,
             'callback' => $callback
         ];
+    }
+
+    /**
+     * Concatenates multiple paths into a single path.
+     *
+     * @param string ...$paths The paths to concatenate.
+     * @return string The concatenated path.
+     */
+    private function concatenatePaths(string ...$paths)
+    {
+        $pathSegments = array_merge(
+            ...array_map(function ($path) {
+                return explode("/", $path);
+            }, $paths)
+        );
+        $sanitizedPathSegments = array_filter($pathSegments, function ($segment) {
+            return $segment;
+        });
+
+        $fullPath = "/" . implode("/", $sanitizedPathSegments);
+
+        return $fullPath;
+    }
+
+    /**
+     * Defines a group of routes with common prefix path or middlewares.
+     *
+     * @param array $options An array of options for the group, including:
+     *   - "path": The common prefix path for all routes within this group. Defaults to an empty string.
+     *   - "middleware": An array of middleware functions to be applied to all routes within this group. Defaults to an empty array.
+     * @param callable $callback A callback function where routes specific to this group are defined.
+     * @return void
+     */
+    public function group(array $options, callable $callback): void
+    {
+        if (!isset($options["path"]))
+            $options["path"] = "";
+
+        if (!isset($options["middleware"]))
+            $options["middleware"] = [];
+
+        $this->options = $options;
+
+        $this->isGrouping = true;
+        $callback($this);
+        $this->isGrouping = false;
     }
 
     /**
@@ -108,7 +172,8 @@ class Router
         $path = URL;
 
         $method = $_SERVER['REQUEST_METHOD'];
-        if (!in_array($method, $this->methods, true)) $this->methodNotFound();
+        if (!in_array($method, $this->methods, true))
+            $this->methodNotFound();
 
 
         foreach ($this->mapper[$method] as $element) {
@@ -130,7 +195,7 @@ class Router
      */
     private function badrequest(): void
     {
-        echo '<h1>Pagina no encontrada revisa tu url</h1>';
+        echo '<h1>Page not found</h1>';
     }
 
     /*
