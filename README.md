@@ -106,15 +106,15 @@ $authMiddleware = function () {
 We can use it in the function call stacks as follows:
 
 ```php
-$router->endpoint('GET', '/home', $authMiddleware, function () {
-    echo '<h1>Session found</h1>'
+$router->get('/home', $authMiddleware, function () {
+    //Your code here
 });
 ```
 
 Note that if the session does not exist, the user is redirected to login, where in the login route the view is declared, something like this:
 
 ```php
-$router->endpoint('GET', '/login', function () {
+$router->get( '/login', function () {
    //Here the view of /login
 });
 ```
